@@ -8,7 +8,7 @@ public class LiorScript : MonoBehaviour
     void Start()
     {
         //This is Lior's doing!
-        Debug.Log("This is Lior's Script with even better changes");
+  Debug.Log("This is Lior's Script with new addition and even better changes");
         
     }
 
