@@ -7,7 +7,9 @@ public class LiorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //This is Lior's doing!
         Debug.Log("This is Lior's Script");
+        
     }
 
     // Update is called once per frame
