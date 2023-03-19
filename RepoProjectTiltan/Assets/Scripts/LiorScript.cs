@@ -13,6 +13,7 @@ public class LiorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    //This is the great work of mrs. Lee.
          Debug.Log("This is my update!");
     }
 }
