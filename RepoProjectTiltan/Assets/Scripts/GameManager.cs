@@ -58,13 +58,11 @@ public class GameManager : MonoBehaviour
         }
 
         Gyroscope gyro = Input.gyro;
-        currentGyroDebug.text = gyro.attitude.ToString();
-        watermelonTransform.rotation = GyroToUnity(gyro.attitude);
+            //  currentGyroDebug.text = gyro.attitude.ToString();
+        watermelonTransform.rotation =
+            new Quaternion(gyro.attitude.z, gyro.attitude.y, gyro.attitude.x, gyro.attitude.w);
     }
    
-    private static Quaternion GyroToUnity(Quaternion q)
-    {
-        return new Quaternion(q.x, q.y, -q.z, -q.w);
-    }
+  
     
 }
