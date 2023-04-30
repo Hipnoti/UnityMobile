@@ -22,9 +22,9 @@ public class MovePositionLerp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sumTimePassed += Time.deltaTime;
         if (movingTowardsTarget)
         {
+            sumTimePassed += Time.deltaTime;
            transform.position = Vector3.Lerp(startingPosition, targetTransform.position, sumTimePassed/lerpDuration);
            if (sumTimePassed >= lerpDuration)
                movingTowardsTarget = false;
