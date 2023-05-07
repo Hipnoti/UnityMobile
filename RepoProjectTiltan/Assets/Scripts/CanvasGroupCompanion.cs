@@ -14,7 +14,7 @@ public class CanvasGroupCompanion : MonoBehaviour
         
         _canvasGroup.alpha = 0;
         _canvasGroup.interactable = false;
-        _canvasGroup.DOFade(1, 10f).SetEase(Ease.Linear).OnKill(TweenKilled).OnComplete(FadeCompleted);
+        _canvasGroup.DOFade(1, 0.5f).SetEase(Ease.Linear).OnKill(TweenKilled).OnComplete(FadeCompleted);
     }
 
     void FadeCompleted()

@@ -8,6 +8,19 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance
+    {
+        get
+        {
+            return instance;
+        }
+        private set
+        {
+            instance = value;
+        }
+    }
+
+    private static GameManager instance;
     
     [SerializeField] private GameObject _lightTouch;
     
@@ -19,20 +32,18 @@ public class GameManager : MonoBehaviour
     [Header("Gyro")] 
     [SerializeField] private TextMeshProUGUI currentGyroDebug;
     [SerializeField] private Transform watermelonTransform;
-    
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     for (int i = 0; i < Input.touchCount; i++)
-    //     {
-    //         Touch currentTouch = Input.touches[i];
-    //         if (currentTouch.phase == TouchPhase.Began)
-    //         {
-    //             TextMeshProUGUI instadDebugLogText = Instantiate(textLogObjectToSpawn, listOfTouchesPanelUI);
-    //             instadDebugLogText.text = "Touch at " + currentTouch.position.x + ',' + currentTouch.position.y;
-    //         }
-    //     }
-    // }
+
+    public void LoadLevel(int levelNumber)
+    {
+        //Actually load the level with SceneManager
+        Debug.Log("We have chosen level " + levelNumber);
+        AnalyticsManager.Instance.ReportLevelLoaded(levelNumber);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
