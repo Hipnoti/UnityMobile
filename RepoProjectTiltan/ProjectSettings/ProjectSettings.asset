@@ -666,7 +666,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: UNITY_ANALYTICS_EVENT_LOGS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -757,7 +758,7 @@ PlayerSettings:
   cloudServicesEnabled:
     Build: 0
     Collab: 0
-    Game Performance: 0
+    Game Performance: 1
     Purchasing: 0
     UDP: 0
     Unity Ads: 0

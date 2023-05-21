@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    private const string stringConst = "This log string hopefully won't take too much memory";
+    
     public static GameManager Instance
     {
         get
@@ -21,8 +23,11 @@ public class GameManager : MonoBehaviour
     }
 
     private static GameManager instance;
+
+    public int calculateFramesInterval = 10;
     
     [SerializeField] private GameObject _lightTouch;
+    [SerializeField] private int numberOfObjectsInstantiated;
     
     [Header("Touches")]
     [SerializeField] private TextMeshProUGUI textLogObjectToSpawn;
@@ -33,6 +38,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentGyroDebug;
     [SerializeField] private Transform watermelonTransform;
 
+    [Header("Spaceship")]
+    [SerializeField] private Transform spaceShipTransform;
+
+    private int calculateframesTimer = 0;
+
+
+    private float timeLeft = 3;
+    
     public void LoadLevel(int levelNumber)
     {
         //Actually load the level with SceneManager
@@ -48,6 +61,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Input.gyro.enabled = true;
+        Debug.Log("This is another line of code!");
     }
 
     void Update()
@@ -64,14 +78,30 @@ public class GameManager : MonoBehaviour
                     
                 }
             }
-
-            
         }
 
         Gyroscope gyro = Input.gyro;
             //  currentGyroDebug.text = gyro.attitude.ToString();
         watermelonTransform.rotation =
             new Quaternion(gyro.attitude.z, gyro.attitude.y, gyro.attitude.x, gyro.attitude.w);
+
+       // Debug.Log("The player position is " + spaceShipTransform.position);
+
+        calculateframesTimer++;
+        if (calculateframesTimer >= calculateFramesInterval)
+        {
+            CalculateObjectsSpawned();
+            calculateframesTimer = 0;
+        }
+        
+        Debug.Log("This log string hopefully won't take too much memory");
+    }
+
+    void CalculateObjectsSpawned()
+    {
+        RotateTween[] rotateTweens = FindObjectsByType<RotateTween>(FindObjectsSortMode.None);
+            
+        Debug.Log("We found " + rotateTweens.Length + " Objects of RotateTween type");
     }
    
   
