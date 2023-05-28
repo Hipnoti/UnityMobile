@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
@@ -18,10 +19,9 @@ public class SpaceshipController : MonoBehaviour
     private void Start()
     {
         GameObject parentGO = new GameObject("Objects Pool");
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 50; i++)
         {
-            Projectile instadProjectile = Instantiate(projectilePrefab);
-            instadProjectile.transform.SetParent(parentGO.transform);
+            Projectile instadProjectile = Instantiate(projectilePrefab, parentGO.transform);
             instadProjectile.gameObject.SetActive(false);
             instantiatedProjectiles.Add(instadProjectile);
         }
@@ -29,26 +29,36 @@ public class SpaceshipController : MonoBehaviour
 
     void Update()
     {
-        Vector3 currentAccelration = Vector3.zero;
-        //currentAccelration = Input.acceleration;
-        currentAccelration = Input.gyro.userAcceleration;
+        // Vector3 currentAccelration = Vector3.zero;
+        // //currentAccelration = Input.acceleration;
+        // currentAccelration = Input.gyro.userAcceleration;
 
-        transform.Translate(currentAccelration * (Time.deltaTime * speed));
+    //    transform.Translate(currentAccelration * (Time.deltaTime * speed));
 
         // debugText.text = currentAccelration.ToString();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Projectile projectileToPull = GetObjectFromPool();
-            if (projectileToPull != null)
+            if (projectileToPull)
             {
                 projectileToPull.gameObject.SetActive(true);
-                projectileToPull.transform.position = projectileSpawnPoint.position;
-                projectileToPull.transform.rotation = projectileSpawnPoint.rotation;
+                Transform projectileTransform = projectileToPull.transform;
+                projectileTransform.position = projectileSpawnPoint.position;
+                projectileTransform.rotation = projectileSpawnPoint.rotation;
+            }
+        }
+
+        foreach (Projectile projectile in instantiatedProjectiles)
+        {
+            if (projectile.gameObject.activeInHierarchy)
+            {
+                projectile.UpdateProjectile();
             }
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     Projectile GetObjectFromPool()
     {
         foreach (Projectile projectile in instantiatedProjectiles)

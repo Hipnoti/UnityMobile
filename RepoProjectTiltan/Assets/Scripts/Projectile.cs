@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     
     [SerializeField] private float speed = 5f;
     // Update is called once per frame
-    void Update()
+    public void UpdateProjectile()
     {
         transform.Translate(speed * Time.deltaTime * Vector3.forward);
 
