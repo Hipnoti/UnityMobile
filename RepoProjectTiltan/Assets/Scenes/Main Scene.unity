@@ -1768,11 +1768,7 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   currentGyroDebug: {fileID: 443777012}
   watermelonTransform: {fileID: 1062601484}
-  fountainReference:
-    m_AssetGUID: 93be9a884199a25449047f100c9d71f6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  playerMainBuildingName: FountainWithLOD1
   spaceShipTransform: {fileID: 0}
 --- !u!114 &1204099323
 MonoBehaviour:
@@ -1841,6 +1837,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4137556556036131949, guid: c34688816fc822e4f82e2615d7f81664, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: acd0bf1dc39aadb4fbfd78e0e3d865da, type: 2}
     - target: {fileID: 5942137826212072720, guid: c34688816fc822e4f82e2615d7f81664, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1888,6 +1888,10 @@ PrefabInstance:
     - target: {fileID: 5942137826212072721, guid: c34688816fc822e4f82e2615d7f81664, type: 3}
       propertyPath: m_Name
       value: Spaceship
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627122628781430122, guid: c34688816fc822e4f82e2615d7f81664, type: 3}
+      propertyPath: skinName
+      value: Orange Skin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c34688816fc822e4f82e2615d7f81664, type: 3}

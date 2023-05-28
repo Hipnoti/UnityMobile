@@ -7,15 +7,21 @@ using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
 {
+    private const string SKINS_FOLDER_NAME = @"Spaceship Materials\";
+    
     [Header("Projectile")]
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    
+
+    [SerializeField] private MeshRenderer spaceshipRenderer;
+    [SerializeField] private string skinName;
     [SerializeField] private float speed = 30f;
     [SerializeField] private TextMeshProUGUI debugText;
 
     private List<Projectile> instantiatedProjectiles = new List<Projectile>();
 
+    private ResourceRequest _resourceRequest;
+    
     private void Start()
     {
         GameObject parentGO = new GameObject("Objects Pool");
@@ -25,6 +31,7 @@ public class SpaceshipController : MonoBehaviour
             instadProjectile.gameObject.SetActive(false);
             instantiatedProjectiles.Add(instadProjectile);
         }
+
     }
 
     void Update()
@@ -39,6 +46,7 @@ public class SpaceshipController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            ChangeSkin();
             Projectile projectileToPull = GetObjectFromPool();
             if (projectileToPull)
             {
@@ -56,6 +64,15 @@ public class SpaceshipController : MonoBehaviour
                 projectile.UpdateProjectile();
             }
         }
+        
+        if (_resourceRequest != null )
+        {
+            if (_resourceRequest.isDone)
+            {
+                spaceshipRenderer.material = (Material)_resourceRequest.asset;
+                _resourceRequest = null;
+            }
+        }
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
@@ -70,4 +87,11 @@ public class SpaceshipController : MonoBehaviour
         Debug.LogWarning("No object to pool! we need more objects." + Environment.NewLine + "Must construct additional objects");
         return null;
     }
+
+    [ContextMenu("Change Skin")]
+    void ChangeSkin()
+    {
+        _resourceRequest = Resources.LoadAsync<Material>(SKINS_FOLDER_NAME + skinName);
+    }
+
 }

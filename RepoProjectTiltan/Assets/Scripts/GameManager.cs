@@ -40,10 +40,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentGyroDebug;
     [SerializeField] private Transform watermelonTransform;
 
-    [Header("Spaceship")]
-    [SerializeField] AssetReference fountainReference;
+    // [Header("Spaceship")]
+    // [SerializeField] AssetReference fountainReference;
+    [SerializeField] private string playerMainBuildingName;
     [SerializeField] private Transform spaceShipTransform;
 
+    private GameObject loadedMainBuilding;
 
 
     private int calculateframesTimer = 0;
@@ -69,11 +71,12 @@ public class GameManager : MonoBehaviour
     {
         Input.gyro.enabled = true;
         Debug.Log("This is another line of code!");
+        
+        loadedMainBuilding = Resources.Load<GameObject>(playerMainBuildingName);
+        //  resourceRequest = Resources.LoadAsync<GameObject>("FountainWithLOD");
+        // AsyncOperationHandle handle = fountainReference.LoadAssetAsync<GameObject>();
+        // handle.Completed += HandleOnCompleted;
 
-      //  resourceRequest = Resources.LoadAsync<GameObject>("FountainWithLOD");
-      AsyncOperationHandle handle = fountainReference.LoadAssetAsync<GameObject>();
-      handle.Completed += HandleOnCompleted;
-      
     }
 
     private void HandleOnCompleted(AsyncOperationHandle obj)
