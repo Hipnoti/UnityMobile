@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         Input.gyro.enabled = true;
         Debug.Log("This is another line of code!");
-        
+        Input.simulateMouseWithTouches = true;
         loadedMainBuilding = Resources.Load<GameObject>(playerMainBuildingName);
         //  resourceRequest = Resources.LoadAsync<GameObject>("FountainWithLOD");
         // AsyncOperationHandle handle = fountainReference.LoadAssetAsync<GameObject>();
